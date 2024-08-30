@@ -5,24 +5,36 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import react from 'eslint-plugin-react'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
 
 export default tseslint.config(
   { ignores: ['dist'] },
   {
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.recommended,
+      ...tseslint.configs.recommendedTypeChecked,
       eslintConfigPrettier,
       eslintPluginPrettierRecommended,
     ],
     files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
+    settings: { react: { version: '18.3' } },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      react,
+      'jsx-a11y': jsxA11y,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -30,6 +42,9 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      'jsx-a11y/alt-text': 'error',
     },
   }
 )
