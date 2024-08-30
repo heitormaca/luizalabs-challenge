@@ -8,15 +8,15 @@
     xl: 1120px,
     2xl: 1220px,
   );
-  $chosenBreakpoint: map-get($breakpoints, $breakpoint);
+  $chosen-breakpoint: map.get($breakpoints, $breakpoint);
 
-  @if not $chosenBreakpoint {
+  @if not $chosen-breakpoint {
     @warn "Invalid breakpoint: #{$breakpoint}. Using default value: var(--breakpoint-md).";
 
-    $chosenBreakpoint: var(--breakpoint-md);
+    $chosen-breakpoint: var(--breakpoint-md);
   }
 
-  @media (min-width: $chosenBreakpoint) {
+  @media (min-width: $chosen-breakpoint) {
     @content;
   }
 }
