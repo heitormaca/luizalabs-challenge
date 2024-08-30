@@ -1,0 +1,14 @@
+@use 'reset';
+@use 'vars';
+@use 'colors';
+@use 'typography';
+@use 'spacing';
+@use 'utils';
+
+body {
+  background: var(--color-body);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: 100%;
+  min-height: 100vh;
+}
