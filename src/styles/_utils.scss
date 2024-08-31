@@ -8,7 +8,7 @@
     xl: 1120px,
     2xl: 1220px,
   );
-  $chosen-breakpoint: map.get($breakpoints, $breakpoint);
+  $chosen-breakpoint: map-get($breakpoints, $breakpoint);
 
   @if not $chosen-breakpoint {
     @warn "Invalid breakpoint: #{$breakpoint}. Using default value: var(--breakpoint-md).";
