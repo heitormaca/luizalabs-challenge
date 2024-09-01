@@ -1,23 +1,23 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import ErrorPage from '../../components/pages/error-page'
-import HomePage from '../../pages/home'
-import HeroPage from '../../pages/hero'
+import Hero from '../../pages/hero'
+import Heroes from '../../pages/heroes'
 
 const RouterConfig: React.FC = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Navigate to={'/heros'} replace />,
+      element: <Navigate to={'/heroes'} replace />,
       errorElement: <ErrorPage />,
     },
     {
-      path: '/heros',
-      element: <HomePage />,
+      path: '/heroes',
+      element: <Heroes />,
       errorElement: <ErrorPage />,
     },
     {
-      path: 'heros/:heroId',
-      element: <HeroPage />,
+      path: 'heroes/:heroId',
+      element: <Hero />,
       errorElement: <ErrorPage />,
     },
   ])

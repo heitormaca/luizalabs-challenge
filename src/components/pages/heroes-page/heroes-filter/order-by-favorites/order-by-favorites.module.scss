@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+
+  .icon {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .label {
+    text-wrap: nowrap;
+  }
+}

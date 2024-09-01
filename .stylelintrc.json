@@ -9,6 +9,9 @@
     "scss/no-global-function-names": null,
     "prettier/prettier": true,
     "at-rule-no-unknown": null,
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "property-no-vendor-prefix": null,
+    "no-descending-specificity": null,
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }
