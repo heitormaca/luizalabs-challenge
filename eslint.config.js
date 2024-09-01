@@ -52,6 +52,8 @@ export default tseslint.config(
         },
       ],
       'react/no-unescaped-entities': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
     },
   }
 )
