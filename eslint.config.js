@@ -7,6 +7,7 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
+import tanstackQuery from '@tanstack/eslint-plugin-query'
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -27,6 +28,7 @@ export default tseslint.config(
       ...tseslint.configs.recommendedTypeChecked,
       eslintConfigPrettier,
       eslintPluginPrettierRecommended,
+      ...tanstackQuery.configs['flat/recommended'],
     ],
     files: ['**/*.{ts,tsx}'],
     settings: { react: { version: '18.3' } },
