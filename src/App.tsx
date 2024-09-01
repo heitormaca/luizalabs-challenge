@@ -1,5 +1,7 @@
+import RouterConfig from './configs/react-router-dom'
+
 function App() {
-  return <div>App</div>
+  return <RouterConfig />
 }
 
 export default App

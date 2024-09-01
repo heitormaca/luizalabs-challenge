@@ -45,6 +45,13 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       'jsx-a11y/alt-text': 'error',
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'auto',
+        },
+      ],
+      'react/no-unescaped-entities': 'off',
     },
   }
 )
