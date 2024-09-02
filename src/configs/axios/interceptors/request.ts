@@ -1,5 +1,5 @@
 import { AxiosInterceptorManager, AxiosRequestConfig } from 'axios'
-import { getHash } from '../../../utils/getHash'
+import getHash from '../../../utils/getHash'
 
 const requestMarvelInterceptor = (
   request: AxiosInterceptorManager<AxiosRequestConfig>

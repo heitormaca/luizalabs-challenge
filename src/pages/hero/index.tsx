@@ -1,5 +1,7 @@
-const HeroPage: React.FC = () => {
-  return <div>HeroPage</div>
+import HeroPage from '../../components/pages/hero-page'
+
+const Hero: React.FC = () => {
+  return <HeroPage />
 }
 
-export default HeroPage
+export default Hero

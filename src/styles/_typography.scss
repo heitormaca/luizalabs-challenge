@@ -87,11 +87,3 @@ b,
 strong {
   font-weight: bold;
 }
-
-/* utility classes */
-.truncate {
-  // truncate text if it exceeds parent
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
