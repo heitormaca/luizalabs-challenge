@@ -16,7 +16,7 @@ const RouterConfig: React.FC = () => {
       errorElement: <ErrorPage />,
     },
     {
-      path: 'heroes/:heroId',
+      path: '/heroes/:heroId',
       element: <Hero />,
       errorElement: <ErrorPage />,
     },

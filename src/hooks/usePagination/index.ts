@@ -14,7 +14,7 @@ const usePagination = ({
   total,
   setSearchParams,
 }: UsePaginationProps) => {
-  const totalPagesCalc = Math.floor(total / limit)
+  const totalPagesCalc = Math.ceil(total / limit)
 
   const totalPages = totalPagesCalc < 1 ? 1 : totalPagesCalc
 

@@ -24,7 +24,6 @@ const HeroesPage: React.FC = () => {
   })
 
   const location = useLocation()
-
   const queryParams = parseQueryString(String(location.search))
 
   const name = methods.watch('search')
