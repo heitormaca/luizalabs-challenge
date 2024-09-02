@@ -22,6 +22,17 @@ export default {
   },
 
   async details(params: CharacterComicsParameters) {
+    const result = await marvelInstance.get<DataWrapper<Character>>(
+      `${URL_CONTROLLER}/${params.characterId}`,
+      {
+        params: { ...params },
+      }
+    )
+
+    return result.data
+  },
+
+  async detailsComics(params: CharacterComicsParameters) {
     const result = await marvelInstance.get<DataWrapper<Comic>>(
       `${URL_CONTROLLER}/${params.characterId}/comics`,
       {

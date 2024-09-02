@@ -1,12 +1,12 @@
 import { FormProvider, useForm } from 'react-hook-form'
+import { useLocation } from 'react-router-dom'
+import { CharactersParameters } from '../../../domains/characters/characters.types'
+import { useCharacters } from '../../../domains/characters/characters.hooks'
+import parseQueryString from '../../../utils/parseQueryString'
 import SearchBar from '../../shared/search-bar'
 import HeroesFilter from './heroes-filter'
 import HeroesList from './heroes-list'
 import s from './heroes-page.module.scss'
-import { CharactersParameters } from '../../../domains/characters/characters.types'
-import { useCharacters } from '../../../domains/characters/characters.hooks'
-import { useLocation } from 'react-router-dom'
-import parseQueryString from '../../../utils/parseQueryString'
 
 export interface CharactersFormParameters {
   search?: string

@@ -4,9 +4,4 @@
   border-radius: var(--border-radius-xs);
   background-color: var(--red-200);
   color: var(--red-900);
-
-  &:checked {
-    background-color: green; // Cor desejada para o item selecionado
-    color: green; // Cor do texto do item selecionado
-  }
 }

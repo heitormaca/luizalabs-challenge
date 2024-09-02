@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
+import charactersService from './characters.service'
 import {
   CharacterComicsParameters,
   CharactersParameters,
 } from './characters.types'
-import charactersService from './characters.service'
 
 export function useCharacters(params?: CharactersParameters) {
   return useQuery({
@@ -12,9 +12,22 @@ export function useCharacters(params?: CharactersParameters) {
   })
 }
 
+export function useCharacter(params: CharacterComicsParameters) {
+  const { characterId } = params
+
+  return useQuery({
+    queryKey: ['character', params],
+    queryFn: () => charactersService.details(params),
+    enabled: characterId !== -1,
+  })
+}
+
 export function useCharacterComics(params: CharacterComicsParameters) {
+  const { characterId } = params
+
   return useQuery({
     queryKey: ['characterComics', params],
-    queryFn: () => charactersService.details(params),
+    queryFn: () => charactersService.detailsComics(params),
+    enabled: characterId !== -1,
   })
 }

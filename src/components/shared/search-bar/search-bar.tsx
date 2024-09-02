@@ -1,6 +1,6 @@
+import { useCallback, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 import s from './search-bar.module.scss'
-import { useCallback, useRef } from 'react'
 
 interface SearchBarProps {
   variant?: 'heros' | 'hero'

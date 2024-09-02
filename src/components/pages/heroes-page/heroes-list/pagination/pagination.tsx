@@ -1,14 +1,14 @@
+import { useSearchParams } from 'react-router-dom'
 import {
   IconChevronLeft,
   IconChevronsLeft,
   IconChevronRight,
   IconChevronsRight,
 } from '@tabler/icons-react'
-import ButtonIcon from './button-icon'
-import s from './pagination.module.scss'
-import { useSearchParams } from 'react-router-dom'
 import usePagination from '../../../../../hooks/usePagination'
+import ButtonIcon from './button-icon'
 import Select from './select'
+import s from './pagination.module.scss'
 
 interface PaginationProps {
   offset: number
