@@ -1,0 +1,39 @@
+@use '../../../../../styles/utils';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: var(--space-8xl);
+  margin-bottom: var(--space-8xl);
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+
+    .select_wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+    }
+
+    .buttons {
+      display: flex;
+      gap: var(--space-2xs);
+    }
+  }
+}
+
+@include utils.breakpoint(sm) {
+  .wrapper {
+    .content {
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: var(--space-xl);
+    }
+  }
+}

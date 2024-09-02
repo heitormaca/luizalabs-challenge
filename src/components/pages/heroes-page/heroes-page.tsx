@@ -3,15 +3,43 @@ import SearchBar from '../../shared/search-bar'
 import HeroesFilter from './heroes-filter'
 import HeroesList from './heroes-list'
 import s from './heroes-page.module.scss'
+import { CharactersParameters } from '../../../domains/characters/characters.types'
+import { useCharacters } from '../../../domains/characters/characters.hooks'
+import { useLocation } from 'react-router-dom'
+import parseQueryString from '../../../utils/parseQueryString'
+
+export interface CharactersFormParameters {
+  search?: string
+  orderBy?: boolean
+  onlyFavorites: boolean
+}
 
 const HeroesPage: React.FC = () => {
-  const methods = useForm({
+  const methods = useForm<CharactersFormParameters>({
     defaultValues: {
-      search: '',
-      orderBy: true,
       onlyFavorites: false,
+      orderBy: true,
+      search: '',
     },
   })
+
+  const location = useLocation()
+
+  const queryParams = parseQueryString(String(location.search))
+
+  const name = methods.watch('search')
+  const orderBy = methods.watch('orderBy')
+
+  const requestParams: CharactersParameters = {
+    nameStartsWith: name?.length ? name : undefined,
+    orderBy: orderBy ? 'name' : '-name',
+    offset: Number(queryParams.offset || 0),
+    limit: Number(queryParams.limit || 20),
+  }
+
+  const { data, isPending } = useCharacters({ ...requestParams })
+
+  const { offset, limit, total, results } = data?.data || {}
 
   return (
     <div className={s.wrapper}>
@@ -29,8 +57,14 @@ const HeroesPage: React.FC = () => {
           <div className={s.search_bar}>
             <SearchBar />
           </div>
-          <HeroesFilter />
-          <HeroesList />
+          <HeroesFilter total={total} />
+          <HeroesList
+            data={results}
+            offset={offset}
+            limit={limit}
+            total={total}
+            isPending={isPending}
+          />
         </FormProvider>
       </div>
     </div>

@@ -2,10 +2,24 @@ import OrderByFavorites from './order-by-favorites'
 import OrderByName from './order-by-name'
 import s from './hero-filters.module.scss'
 
-const HeroesFilter: React.FC = () => {
+interface HeroesFilterProps {
+  total?: number
+}
+
+const HeroesFilter: React.FC<HeroesFilterProps> = ({ total }) => {
+  const handleWord = (singular: string, plural: string) => {
+    if (total === 1) {
+      return singular
+    }
+    return plural
+  }
+
   return (
     <div className={s.wrapper}>
-      <div className={s.total}>Entrados 20 heróis</div>
+      <div className={s.total}>
+        {total &&
+          `${handleWord('Encontrado', 'Encontrados')} ${total} ${handleWord('herói', 'heróis')}`}
+      </div>
       <div className={s.filters}>
         <OrderByName />
         <OrderByFavorites />
