@@ -6,7 +6,7 @@ import {
   IconChevronsRight,
 } from '@tabler/icons-react'
 import usePagination from '../../../../../hooks/usePagination'
-import ButtonIcon from './button-icon'
+import { ButtonIcon } from '../../../../shared'
 import Select from './select'
 import s from './pagination.module.scss'
 
@@ -58,20 +58,20 @@ const Pagination: React.FC<PaginationProps> = ({
           </ButtonIcon>
           <ButtonIcon
             onClick={goToNextPage}
-            disabled={currentPage + 1 > totalPages}
+            disabled={currentPage >= totalPages}
           >
             <IconChevronRight
               size={18}
-              color={currentPage + 1 > totalPages ? 'gray' : 'red'}
+              color={currentPage >= totalPages ? 'gray' : 'red'}
             />
           </ButtonIcon>
           <ButtonIcon
             onClick={goToLastPage}
-            disabled={currentPage + 1 > totalPages}
+            disabled={currentPage >= totalPages}
           >
             <IconChevronsRight
               size={18}
-              color={currentPage + 1 > totalPages ? 'gray' : 'red'}
+              color={currentPage >= totalPages ? 'gray' : 'red'}
             />
           </ButtonIcon>
         </div>

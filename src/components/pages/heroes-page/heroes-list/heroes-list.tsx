@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useFavorites } from '../../../../contexts/favorites-context/favorites-context-hook'
 import { Character } from '../../../../domains/characters/characters.types'
-import FavoriteToogle from '../../../shared/favorite-toogle'
+import { FavoriteToogle } from '../../../shared'
 import Pagination from './pagination'
 import s from './heroes-list.module.scss'
 
@@ -57,16 +57,15 @@ const HeroesList: React.FC<HeroesListProps> = ({
     <section>
       <div className={s.wrapper}>
         {filteredData.map((character) => {
+          const characterImage = `${character.thumbnail?.path}.${character.thumbnail?.extension}`
+
           return (
             <div key={character.id}>
               <div
                 className={s.image_wrapper}
                 onClick={() => handleCharacterClick(String(character.id))}
               >
-                <img
-                  src={`${character.thumbnail?.path}.${character.thumbnail?.extension}`}
-                  alt={character.name}
-                />
+                <img src={characterImage} alt={character.name} />
               </div>
               <div className={s.title_wrapper}>
                 <div className={s.tooltip}>

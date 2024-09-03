@@ -1,3 +1,116 @@
+@use '../../../../styles/utils';
+
 .wrapper {
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: var(--space-4xl);
+
+  .character_details {
+    order: 2;
+
+    .title_wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-2xl);
+      gap: var(--space-md);
+
+      h2 {
+        font-weight: 800;
+        word-break: break-word;
+      }
+
+      .toogle {
+        margin-top: var(--space-2xs);
+      }
+    }
+
+    .description {
+      line-height: 1.6;
+      margin-bottom: var(--space-xl);
+    }
+
+    .infos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .comics {
+        .comics_image_wrapper {
+          display: flex;
+          align-items: center;
+          gap: var(--space-md);
+
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+
+      .films {
+        .films_image_wrapper {
+          height: 31px;
+          display: flex;
+          align-items: center;
+          gap: var(--space-md);
+
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .rating {
+      display: flex;
+      gap: var(--space-lg);
+      margin: var(--space-2xl) 0;
+
+      p {
+        font-weight: 700;
+      }
+
+      .rating_image_wrapper {
+        display: flex;
+        gap: var(--space-3xs);
+      }
+    }
+
+    .last_comic {
+      display: flex;
+      gap: var(--space-xl);
+      margin: var(--space-2xl) 0;
+
+      p {
+        font-weight: 700;
+
+        span {
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+@include utils.breakpoint(sm) {
+  .wrapper {
+    grid-template-columns: 2fr 1.5fr;
+
+    .character_details {
+      order: 1;
+    }
+
+    .image_wrapper {
+      order: 2;
+    }
+  }
+}
+
+@include utils.breakpoint(md) {
+  .wrapper {
+    grid-template-columns: 1.5fr 3fr;
+
+    .character_details {
+      order: 1;
+    }
+  }
 }

@@ -19,11 +19,15 @@ const HeroPage: React.FC = () => {
   } = useCharacterComics({
     characterId: heroId ? Number(heroId) : -1,
     orderBy: '-onsaleDate',
+    limit: 10,
   })
 
-  const { results } = characterDetails?.data || {}
+  const { results: characterResults } = characterDetails?.data || {}
+  const { results: characterComicsResults } = characterComicsDetails?.data || {}
 
-  const characterData = results?.[0]
+  const characterData = characterResults?.[0]
+
+  const lastCharacterComicsData = characterComicsResults?.[0].dates?.[0].date
 
   if (isPendingCharacterDetails || isPendingCharacterComicsDetails)
     return <div>Carregando...</div>
@@ -33,7 +37,15 @@ const HeroPage: React.FC = () => {
   return (
     <div className={s.wrapper}>
       <div className={s.content}>
-        {characterData && <HeroDetails character={characterData} />}
+        <div className={s.logo_wrapper}>
+          <img src="/logo_menor.svg" alt="Logotipo Marvel Search heros" />
+        </div>
+        {characterData && (
+          <HeroDetails
+            character={characterData}
+            lastComicsDate={lastCharacterComicsData}
+          />
+        )}
         <HeroLastComics />
       </div>
     </div>

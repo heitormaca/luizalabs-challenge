@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useFavorites } from '../../../contexts/favorites-context/favorites-context-hook'
 import s from './favorite-toogle.module.scss'
 
-interface FavoriteToogleProps {
+interface FavoriteToogleProps extends React.HTMLAttributes<HTMLDivElement> {
   characterId: string
 }
 
@@ -11,7 +11,10 @@ interface TooltipMessageProps {
   characterId: string
 }
 
-const FavoriteToogle: React.FC<FavoriteToogleProps> = ({ characterId }) => {
+const FavoriteToogle: React.FC<FavoriteToogleProps> = ({
+  characterId,
+  ...props
+}) => {
   const { getFavorite, handleFavoriteClick } = useFavorites()
 
   const [tooltipMessage, setTooltipMessage] = useState<TooltipMessageProps>({
@@ -37,12 +40,12 @@ const FavoriteToogle: React.FC<FavoriteToogleProps> = ({ characterId }) => {
 
   const onMouseEnter = () => setIsHovered(true)
   const onMouseLeave = () => {
-    setIsHovered(false)
+    setIsHovered(true)
     setTooltipMessage({ message: '', characterId: '' })
   }
 
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} {...props}>
       {isFavorite ? (
         <img
           src="/favorito_01.svg"
