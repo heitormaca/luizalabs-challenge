@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "format": "prettier --write",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cy:open": "cypress open",
+    "e2e": "cypress run"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.14.0",
@@ -28,6 +30,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "cypress": "^13.14.1",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.9.0",
