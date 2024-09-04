@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react'
-import s from './button-icon.module.scss'
 import classNames from '../../../utils/classNames'
+import s from './button-icon.module.scss'
 
 interface ButtonIconProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
