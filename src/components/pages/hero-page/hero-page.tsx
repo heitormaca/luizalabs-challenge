@@ -3,6 +3,7 @@ import {
   useCharacter,
   useCharacterComics,
 } from '../../../domains/characters/characters.hooks'
+import { Loader } from '../../shared'
 import HeroDetails from './hero-details'
 import HeroLastComics from './hero-last-comics'
 import s from './hero-page.module.scss'
@@ -57,7 +58,11 @@ const HeroPage: React.FC = () => {
     isPendingCharacterComicsDetails ||
     isPendingCharacterComicsDetailsDate
   )
-    return <div>Carregando...</div>
+    return (
+      <div className={s.loading_wrapper}>
+        <Loader variant="white" />
+      </div>
+    )
 
   return (
     <div className={s.wrapper}>

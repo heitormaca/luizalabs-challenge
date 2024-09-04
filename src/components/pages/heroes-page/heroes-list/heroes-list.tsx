@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCharacters } from '../../../../domains/characters/characters.hooks'
 import { CharactersParameters } from '../../../../domains/characters/characters.types'
 import { useSearchParamsObject } from '../../../../hooks/useSearchParamsObject'
-import { FavoriteToogle } from '../../../shared'
+import { FavoriteToogle, Loader, NoData } from '../../../shared'
 import Pagination from './pagination'
 import s from './heroes-list.module.scss'
 
@@ -47,11 +47,19 @@ const HeroesList: React.FC<HeroesListProps> = ({ setTotal, setIsLoading }) => {
   }, [isLoading])
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return (
+      <div className={s.loading_wrapper}>
+        <Loader />
+      </div>
+    )
   }
 
   if (!results?.length) {
-    return <div>Sem dados.</div>
+    return (
+      <div className={s.no_data}>
+        <NoData />
+      </div>
+    )
   }
 
   return (
