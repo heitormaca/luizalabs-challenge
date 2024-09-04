@@ -16,8 +16,12 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({
 }) => {
   const characterImage = `${character.thumbnail?.path}.${character.thumbnail?.extension}`
 
-  const date = parseISO(lastComicsDate || '')
-  const formattedDate = format(date, 'dd MMM. yyyy', { locale: ptBR })
+  let formattedDate: string | undefined
+
+  if (lastComicsDate) {
+    const date = parseISO(lastComicsDate)
+    formattedDate = format(date, 'dd MMM. yyyy', { locale: ptBR })
+  }
 
   return (
     <div className={s.wrapper}>
@@ -55,11 +59,13 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({
             <img src="/avaliacao_on.svg" alt="Ícone de estrela" />
           </div>
         </div>
-        <div className={s.last_comic}>
-          <p>
-            Último quadrinho: <span>{formattedDate}</span>
-          </p>
-        </div>
+        {formattedDate && (
+          <div className={s.last_comic}>
+            <p>
+              Último quadrinho: <span>{formattedDate}</span>
+            </p>
+          </div>
+        )}
       </div>
       <HeroImage src={characterImage} />
     </div>

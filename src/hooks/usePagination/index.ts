@@ -25,10 +25,9 @@ const usePagination = ({
     (newOffset: number) => {
       if (setSearchParams) {
         setSearchParams((params) => {
-          const newParams = new URLSearchParams(params)
-          newParams.set('offset', String(newOffset))
-          newParams.set('limit', String(limit))
-          return newParams
+          params.set('offset', String(newOffset))
+          params.set('limit', String(limit))
+          return params
         })
       }
     },

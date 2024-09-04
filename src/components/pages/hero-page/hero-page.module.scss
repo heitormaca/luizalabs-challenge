@@ -17,6 +17,10 @@
       justify-content: center;
       margin-bottom: var(--space-xl);
       padding-top: var(--space-xl);
+
+      img {
+        cursor: pointer;
+      }
     }
   }
 }

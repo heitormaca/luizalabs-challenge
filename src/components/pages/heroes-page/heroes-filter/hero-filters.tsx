@@ -17,7 +17,7 @@ const HeroesFilter: React.FC<HeroesFilterProps> = ({ total }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.total}>
-        {total &&
+        {typeof total === 'number' &&
           `${handleWord('Encontrado', 'Encontrados')} ${total} ${handleWord('herói', 'heróis')}`}
       </div>
       <div className={s.filters}>

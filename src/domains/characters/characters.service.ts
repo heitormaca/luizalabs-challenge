@@ -21,12 +21,25 @@ export default {
     return result.data
   },
 
+  async listFavorites(favorites: string[]) {
+    let heroes: Character[] = []
+    for (const characterId of favorites) {
+      const result = await this.details({
+        characterId: Number(characterId),
+      })
+
+      const { results } = result?.data || {}
+      if (results) {
+        heroes = [...heroes, ...results]
+      }
+    }
+
+    return heroes
+  },
+
   async details(params: CharacterComicsParameters) {
     const result = await marvelInstance.get<DataWrapper<Character>>(
-      `${URL_CONTROLLER}/${params.characterId}`,
-      {
-        params: { ...params },
-      }
+      `${URL_CONTROLLER}/${params.characterId}`
     )
 
     return result.data

@@ -1,15 +1,22 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 import s from './button-icon.module.scss'
+import classNames from '../../../utils/classNames'
 
-interface ButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonIconProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
+  disabled?: boolean
 }
 
-const ButtonIcon: React.FC<ButtonIconProps> = ({ children, ...props }) => {
+const ButtonIcon: React.FC<ButtonIconProps> = ({
+  children,
+  disabled,
+  ...props
+}) => {
   return (
-    <button className={s.button} {...props}>
+    <div className={classNames(s.button, !!disabled && s.disabled)} {...props}>
       {children}
-    </button>
+    </div>
   )
 }
+
 export default ButtonIcon
