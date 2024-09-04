@@ -2,7 +2,7 @@ import axios from 'axios'
 import { marvelInstanceInterceptors } from './interceptors'
 
 export const marvelInstance = axios.create({
-  baseURL: 'http://gateway.marvel.com/v1/public',
+  baseURL: import.meta.env.VITE_MARVEL_API,
 })
 
 marvelInstanceInterceptors(marvelInstance)
