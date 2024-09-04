@@ -14,11 +14,10 @@ const usePagination = ({
   total,
   setSearchParams,
 }: UsePaginationProps) => {
-  const totalPagesCalc = Math.ceil(total / limit)
-
-  const totalPages = totalPagesCalc < 1 ? 1 : totalPagesCalc
-
   const [offset, setOffset] = useState(initialOffset)
+
+  const totalPagesCalc = Math.ceil(total / limit)
+  const totalPages = totalPagesCalc < 1 ? 1 : totalPagesCalc
 
   const currentPage = Math.floor(offset / limit) + 1
 
@@ -26,10 +25,9 @@ const usePagination = ({
     (newOffset: number) => {
       if (setSearchParams) {
         setSearchParams((params) => {
-          const newParams = new URLSearchParams(params)
-          newParams.set('offset', String(newOffset))
-          newParams.set('limit', String(limit))
-          return newParams
+          params.set('offset', String(newOffset))
+          params.set('limit', String(limit))
+          return params
         })
       }
     },
@@ -42,14 +40,13 @@ const usePagination = ({
   }
 
   const goToLastPage = () => {
-    const lastOffset = Math.max(total - limit, 0)
-    setOffset(lastOffset)
-    updateSearchParams(lastOffset)
+    setOffset((totalPages - 1) * limit)
+    updateSearchParams((totalPages - 1) * limit)
   }
 
   const goToNextPage = () => {
     const nextOffset = offset + limit
-    if (nextOffset < total) {
+    if (nextOffset <= total) {
       setOffset(nextOffset)
       updateSearchParams(nextOffset)
     }

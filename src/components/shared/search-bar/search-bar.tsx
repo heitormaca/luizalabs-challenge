@@ -1,13 +1,15 @@
-import { useFormContext } from 'react-hook-form'
-import s from './search-bar.module.scss'
 import { useCallback, useRef } from 'react'
+import s from './search-bar.module.scss'
+import { useSearchParams } from 'react-router-dom'
+import { useSearchParamsObject } from '../../../hooks/useSearchParamsObject'
 
 interface SearchBarProps {
   variant?: 'heros' | 'hero'
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ variant = 'heros' }) => {
-  const { register, setValue } = useFormContext()
+  const [, setSearchParams] = useSearchParams()
+  const searchParamsObject = useSearchParamsObject()
 
   const debounceRef = useRef<number | null>(null)
 
@@ -20,10 +22,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'heros' }) => {
       }
 
       debounceRef.current = window.setTimeout(() => {
-        setValue('search', value)
+        setSearchParams((params) => {
+          params.set('nameStartsWith', value)
+          return params
+        })
       }, 500)
     },
-    [setValue]
+    [setSearchParams]
   )
 
   return (
@@ -35,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'heros' }) => {
       />
       <img src="/ic_busca.svg" alt="Ícone de busca" className={s.search_icon} />
       <input
-        {...register('search')}
+        value={searchParamsObject.nameStartsWith}
         placeholder="Procure por heróis"
         onChange={handleOnChange}
       />

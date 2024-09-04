@@ -1,23 +1,24 @@
-import { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
+import { useSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
 import s from './order-by-favorites.module.scss'
 
 const OrderByFavorites: React.FC = () => {
-  const { setValue, watch } = useFormContext()
-  const [onlyFavorites, setOnlyFavorites] = useState(
-    watch('onlyFavorites') || false
-  )
+  const [, setSearchParams] = useSearchParams()
+  const searchParamsObject = useSearchParamsObject()
+
+  const isOnlyFavorites = searchParamsObject.onlyFavorites === 'true'
 
   const toggleFavorite = () => {
-    const newValue = !onlyFavorites
-    setOnlyFavorites(newValue)
-    setValue('onlyFavorites', newValue)
+    setSearchParams((params) => {
+      params.set('onlyFavorites', String(!isOnlyFavorites))
+      return params
+    })
   }
 
   return (
     <div className={s.wrapper}>
       <div className={s.icon} onClick={toggleFavorite}>
-        {onlyFavorites ? (
+        {isOnlyFavorites ? (
           <img
             src="/favorito_01.svg"
             alt="Ícone de coração preenchido"

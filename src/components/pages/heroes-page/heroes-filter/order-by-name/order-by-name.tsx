@@ -1,13 +1,22 @@
-import { useFormContext } from 'react-hook-form'
 import s from './order-by-name.module.scss'
+import { useSearchParams } from 'react-router-dom'
+import { useSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
 
 const OrderByName: React.FC = () => {
-  const { register, setValue, watch } = useFormContext()
+  const [, setSearchParams] = useSearchParams()
+  const searchParamsObject = useSearchParamsObject()
 
-  const isChecked = watch('orderBy')
+  const isChecked = searchParamsObject.orderBy
+    ? searchParamsObject.orderBy === 'name'
+      ? true
+      : false
+    : true
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('orderBy', e.target.checked)
+    setSearchParams((params) => {
+      params.set('orderBy', e.target.checked ? 'name' : '-name')
+      return params
+    })
   }
 
   return (
@@ -17,12 +26,7 @@ const OrderByName: React.FC = () => {
         <span>Ordenar por nome - A/Z</span>
       </div>
       <label className={s.switch}>
-        <input
-          {...register('orderBy')}
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleChange}
-        />
+        <input type="checkbox" checked={isChecked} onChange={handleChange} />
         <span className={s.slider}></span>
       </label>
     </div>

@@ -1,44 +1,22 @@
-import { FormProvider, useForm } from 'react-hook-form'
-import SearchBar from '../../shared/search-bar'
-import HeroesFilter from './heroes-filter'
+import { useState } from 'react'
+import { SearchBar } from '../../shared'
+import HeroesFavoritesList from './heroes-favorites-list'
+import { useSearchParamsObject } from '../../../hooks/useSearchParamsObject'
 import HeroesList from './heroes-list'
+import HeroesFilter from './heroes-filter/hero-filters'
 import s from './heroes-page.module.scss'
-import { CharactersParameters } from '../../../domains/characters/characters.types'
-import { useCharacters } from '../../../domains/characters/characters.hooks'
-import { useLocation } from 'react-router-dom'
-import parseQueryString from '../../../utils/parseQueryString'
 
 export interface CharactersFormParameters {
-  search?: string
-  orderBy?: boolean
+  search: string
+  orderBy: boolean
   onlyFavorites: boolean
 }
 
 const HeroesPage: React.FC = () => {
-  const methods = useForm<CharactersFormParameters>({
-    defaultValues: {
-      onlyFavorites: false,
-      orderBy: true,
-      search: '',
-    },
-  })
+  const [total, setTotal] = useState(0)
 
-  const location = useLocation()
-  const queryParams = parseQueryString(String(location.search))
-
-  const name = methods.watch('search')
-  const orderBy = methods.watch('orderBy')
-
-  const requestParams: CharactersParameters = {
-    nameStartsWith: name?.length ? name : undefined,
-    orderBy: orderBy ? 'name' : '-name',
-    offset: Number(queryParams.offset || 0),
-    limit: Number(queryParams.limit || 20),
-  }
-
-  const { data, isPending } = useCharacters({ ...requestParams })
-
-  const { offset, limit, total, results } = data?.data || {}
+  const searchParamsObject = useSearchParamsObject()
+  const isOnlyFavorites = searchParamsObject.onlyFavorites === 'true'
 
   return (
     <div className={s.wrapper}>
@@ -52,19 +30,15 @@ const HeroesPage: React.FC = () => {
           você ama - e arqueles que você descobrirá em breve!
         </p>
 
-        <FormProvider {...methods}>
-          <div className={s.search_bar}>
-            <SearchBar />
-          </div>
-          <HeroesFilter total={total} />
-          <HeroesList
-            data={results}
-            offset={offset}
-            limit={limit}
-            total={total}
-            isPending={isPending}
-          />
-        </FormProvider>
+        <div className={s.search_bar}>
+          <SearchBar />
+        </div>
+        <HeroesFilter total={total} />
+        {isOnlyFavorites ? (
+          <HeroesFavoritesList setTotal={setTotal} />
+        ) : (
+          <HeroesList setTotal={setTotal} />
+        )}
       </div>
     </div>
   )

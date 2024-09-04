@@ -1,59 +1,68 @@
+import { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CharactersParameters } from '../../../../domains/characters/characters.types'
+import { useFavorites } from '../../../../contexts/favorites-context/favorites-context-hook'
 import { FavoriteToogle } from '../../../shared'
-import Pagination from './pagination'
-import s from './heroes-list.module.scss'
-import { useCharacters } from '../../../../domains/characters/characters.hooks'
+import { useFavoritesCharacters } from '../../../../domains/characters/characters.hooks'
 import { useSearchParamsObject } from '../../../../hooks/useSearchParamsObject'
-import { useEffect } from 'react'
+import Pagination from '../heroes-list/pagination'
+import s from './heroes-favorites-list.module.scss'
 
-interface HeroesListProps {
+interface HeroesFavoritesListProps {
   setTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
-const HeroesList: React.FC<HeroesListProps> = ({ setTotal }) => {
-  const navigate = useNavigate()
+const HeroesFavoritesList: React.FC<HeroesFavoritesListProps> = ({
+  setTotal,
+}) => {
   const searchParamsObject = useSearchParamsObject()
-
-  const requestParams: CharactersParameters = {
-    nameStartsWith: searchParamsObject.nameStartsWith,
-    orderBy: searchParamsObject.orderBy || 'name',
-    offset: searchParamsObject.offset || 0,
-    limit: searchParamsObject.limit || 20,
-  }
-
   const isOnlyFavorites = searchParamsObject.onlyFavorites === 'true'
 
-  const { data, isLoading } = useCharacters(requestParams, !isOnlyFavorites)
+  const { data, isLoading } = useFavoritesCharacters(isOnlyFavorites)
 
-  const { limit, offset, total, results } = data?.data || {}
+  const navigate = useNavigate()
 
-  const showPagination =
-    typeof offset === 'number' &&
-    typeof limit === 'number' &&
-    typeof total === 'number'
+  const { favorites } = useFavorites()
+
+  const total = favorites.length
 
   const handleCharacterClick = (characterId: string) => {
     navigate(`/heroes/${characterId}`)
   }
 
+  const filterItens = useMemo(
+    () =>
+      (data || [])
+        .filter((character) => {
+          return character.name?.includes(
+            searchParamsObject.nameStartsWith || ''
+          )
+        })
+        .sort((a, b) => {
+          if (searchParamsObject.orderBy === '-name') {
+            return (b.name || '')?.localeCompare(a.name || '')
+          }
+          return (a.name || '')?.localeCompare(b.name || '')
+        }),
+    [data, searchParamsObject.nameStartsWith, searchParamsObject.orderBy]
+  )
+
   useEffect(() => {
-    setTotal(total || 0)
+    setTotal(favorites.length)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [total])
+  }, [favorites.length])
 
   if (isLoading) {
     return <div>Carregando...</div>
   }
 
-  if (!results?.length) {
+  if (!data?.length) {
     return <div>Sem dados.</div>
   }
 
   return (
     <section>
       <div className={s.wrapper}>
-        {results.map((character) => {
+        {filterItens.map((character) => {
           const characterImage = `${character.thumbnail?.path}.${character.thumbnail?.extension}`
 
           return (
@@ -75,10 +84,8 @@ const HeroesList: React.FC<HeroesListProps> = ({ setTotal }) => {
           )
         })}
       </div>
-      {showPagination && (
-        <Pagination offset={offset} limit={limit} total={total} />
-      )}
+      <Pagination offset={0} limit={20} total={total} />
     </section>
   )
 }
-export default HeroesList
+export default HeroesFavoritesList

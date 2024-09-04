@@ -8,7 +8,7 @@ export interface DataWrapper<T> {
   etag?: string
 }
 
-interface DataContainer<T> {
+export interface DataContainer<T> {
   offset?: number
   limit?: number
   total?: number
@@ -125,7 +125,7 @@ export interface CharacterComicsParameters {
   formatType?: 'comic' | 'collection'
   noVariants?: boolean
   dateDescriptor?: 'lastWeek' | 'thisWeek' | 'nextWeek' | 'thisMonth'
-  dateRange?: number
+  dateRange?: string
   title?: string
   titleStartsWith?: string
   startYear?: number

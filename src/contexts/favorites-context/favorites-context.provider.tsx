@@ -27,7 +27,7 @@ export function FavoritesProvider(props: FavoritesProviderProps) {
     setFavorites(updatedFavorites)
   }
 
-  function isFavorite(characterId: string): boolean {
+  function getFavorite(characterId: string): boolean {
     return favorites.includes(characterId)
   }
 
@@ -37,7 +37,7 @@ export function FavoritesProvider(props: FavoritesProviderProps) {
 
   return (
     <FavoritesContext.Provider
-      value={{ favorites, handleFavoriteClick: updateFavorites, isFavorite }}
+      value={{ favorites, handleFavoriteClick: updateFavorites, getFavorite }}
     >
       {props.children}
     </FavoritesContext.Provider>
