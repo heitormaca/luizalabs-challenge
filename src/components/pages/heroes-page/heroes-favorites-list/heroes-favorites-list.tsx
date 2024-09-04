@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFavoritesCharacters } from '../../../../domains/characters/characters.hooks'
 import { useSearchParamsObject } from '../../../../hooks/useSearchParamsObject'
-import { FavoriteToogle } from '../../../shared'
+import { FavoriteToogle, Loader, NoData } from '../../../shared'
 import Pagination from '../heroes-list/pagination'
 import s from './heroes-favorites-list.module.scss'
 
@@ -54,11 +54,19 @@ const HeroesFavoritesList: React.FC<HeroesFavoritesListProps> = ({
   }, [isLoading])
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return (
+      <div className={s.loading_wrapper}>
+        <Loader />
+      </div>
+    )
   }
 
   if (!data?.length) {
-    return <div>Sem dados.</div>
+    return (
+      <div className={s.no_data}>
+        <NoData />
+      </div>
+    )
   }
 
   return (
