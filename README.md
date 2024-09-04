@@ -1,50 +1,35 @@
-# React + TypeScript + Vite
+# Desafio LuizaLabs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido para o desafio da empresa LuizaLabs. A documentação dos requisitos do desafio está dentro das releases do repositório.
 
-Currently, two official plugins are available:
+## Requisitos para rodar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js v20.16.0 ou superior;
+- Gerenciador de pacotes Pnpm v9.7.0 ou superior;
+- Inserir as seguintes variáveis de ambiente em um arquivo `.env.local` na raiz do projeto:
 
-## Expanding the ESLint configuration
+  ```
+  VITE_PUBLIC_KEY='***********************'
+  VITE_PRIVATE_KEY='***********************'
+  VITE_MARVEL_API='http://gateway.marvel.com/v1/public'
+  ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  **IMPORTANTE:** O valor das variáveis `VITE_PUBLIC_KEY` e `VITE_PRIVATE_KEY` devem ser obtidos no [site da Marvel Developer](https://developer.marvel.com). No site, clique em 'Get a Key' e crie uma conta, caso ainda não possua uma. Após isso, suas chaves estarão disponíveis na aba "My Developer Account" com os nomes "Your public key" e "Your private key". O valor da chave "Your public key" deve ser inserido na variável `VITE_PUBLIC_KEY` e o valor da chave "Your private key" deve ser inserido na variável `VITE_PRIVATE_KEY`.
 
-- Configure the top-level `parserOptions` property like this:
+## Configuração do Front-end
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+O Front-end foi desenvolvido utilizando Vite, React e TypeScript, além de outras bibliotecas listadas no `package.json`. Para configurar o Front-end, siga os passos abaixo:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Instale as dependências necessárias executando o seguinte comando no diretório raiz do projeto:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+  ```
+  pnpm install
+  ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Inicie o projeto executando o comando:
+
+  ```
+  pnpm run dev
+  ```
+
+Agora, para acessar a aplicação, basta abrir o endereço `http://localhost:3000` no seu navegador.
