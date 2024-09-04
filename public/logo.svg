@@ -12,7 +12,7 @@
                 </image>
                 <text id="Search-heros" font-family="Roboto, sans-serif" font-size="16.672" font-weight="bold"
                     fill="#404040">
-                    <tspan x="219" y="95">Search heros</tspan>
+                    <tspan x="219" y="95">Search heroes</tspan>
                 </text>
             </g>
         </g>

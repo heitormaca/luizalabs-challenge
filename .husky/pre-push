@@ -1,0 +1,8 @@
+echo "Running Cypress E2E tests..."
+pnpm run e2e
+
+result=$?
+if [ $result -ne 0 ]; then
+  echo "E2E tests failed. Aborting push."
+  exit 1
+fi

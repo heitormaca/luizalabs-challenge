@@ -71,7 +71,9 @@ const HeroesList: React.FC<HeroesListProps> = ({ setTotal, setIsLoading }) => {
           return (
             <div key={character.id}>
               <div
-                className={s.image_wrapper}
+                id={`character-${character.id}`}
+                className={s.image_character_wrapper}
+                data-character-id={character.id}
                 onClick={() => handleCharacterClick(String(character.id))}
               >
                 <img src={characterImage} alt={character.name} />
