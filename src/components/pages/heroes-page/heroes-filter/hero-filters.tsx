@@ -4,9 +4,12 @@ import s from './hero-filters.module.scss'
 
 interface HeroesFilterProps {
   total?: number
+  isLoading: boolean
 }
 
-const HeroesFilter: React.FC<HeroesFilterProps> = ({ total }) => {
+const HeroesFilter: React.FC<HeroesFilterProps> = ({ total, isLoading }) => {
+  const showFoundedItemsText = !isLoading && typeof total === 'number'
+
   const handleWord = (singular: string, plural: string) => {
     if (total === 1) {
       return singular
@@ -17,7 +20,7 @@ const HeroesFilter: React.FC<HeroesFilterProps> = ({ total }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.total}>
-        {typeof total === 'number' &&
+        {showFoundedItemsText &&
           `${handleWord('Encontrado', 'Encontrados')} ${total} ${handleWord('herói', 'heróis')}`}
       </div>
       <div className={s.filters}>

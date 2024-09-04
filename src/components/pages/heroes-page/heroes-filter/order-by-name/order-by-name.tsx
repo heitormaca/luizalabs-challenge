@@ -1,6 +1,6 @@
-import s from './order-by-name.module.scss'
 import { useSearchParams } from 'react-router-dom'
 import { useSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
+import s from './order-by-name.module.scss'
 
 const OrderByName: React.FC = () => {
   const [, setSearchParams] = useSearchParams()

@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import { useSearchParamsObject } from '../../../hooks/useSearchParamsObject'
 import { SearchBar } from '../../shared'
 import HeroesFavoritesList from './heroes-favorites-list'
-import { useSearchParamsObject } from '../../../hooks/useSearchParamsObject'
-import HeroesList from './heroes-list'
 import HeroesFilter from './heroes-filter/hero-filters'
+import HeroesList from './heroes-list'
 import s from './heroes-page.module.scss'
 
 export interface CharactersFormParameters {
@@ -14,6 +14,7 @@ export interface CharactersFormParameters {
 
 const HeroesPage: React.FC = () => {
   const [total, setTotal] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   const searchParamsObject = useSearchParamsObject()
   const isOnlyFavorites = searchParamsObject.onlyFavorites === 'true'
@@ -33,11 +34,14 @@ const HeroesPage: React.FC = () => {
         <div className={s.search_bar}>
           <SearchBar />
         </div>
-        <HeroesFilter total={total} />
+        <HeroesFilter total={total} isLoading={isLoading} />
         {isOnlyFavorites ? (
-          <HeroesFavoritesList setTotal={setTotal} />
+          <HeroesFavoritesList
+            setTotal={setTotal}
+            setIsLoading={setIsLoading}
+          />
         ) : (
-          <HeroesList setTotal={setTotal} />
+          <HeroesList setTotal={setTotal} setIsLoading={setIsLoading} />
         )}
       </div>
     </div>

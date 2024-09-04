@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
+import { useFavorites } from '../../contexts/favorites-context/favorites-context-hook'
 import charactersService from './characters.service'
 import {
   CharacterComicsParameters,
   CharacterParameters,
   CharactersParameters,
 } from './characters.types'
-import { useFavorites } from '../../contexts/favorites-context/favorites-context-hook'
 
 export function useCharacters(params?: CharactersParameters, enabled = true) {
   return useQuery({

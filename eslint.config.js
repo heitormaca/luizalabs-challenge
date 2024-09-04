@@ -57,6 +57,7 @@ export default tseslint.config(
       'react/prop-types': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
+      'react-hooks/exhaustive-deps': 'off',
     },
   }
 )
