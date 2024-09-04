@@ -1,17 +1,18 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useCharacters } from '../../../../domains/characters/characters.hooks'
 import { CharactersParameters } from '../../../../domains/characters/characters.types'
-import { FavoriteToogle } from '../../../shared'
+import { useSearchParamsObject } from '../../../../hooks/useSearchParamsObject'
+import { FavoriteToogle, Loader, NoData } from '../../../shared'
 import Pagination from './pagination'
 import s from './heroes-list.module.scss'
-import { useCharacters } from '../../../../domains/characters/characters.hooks'
-import { useSearchParamsObject } from '../../../../hooks/useSearchParamsObject'
-import { useEffect } from 'react'
 
 interface HeroesListProps {
   setTotal: React.Dispatch<React.SetStateAction<number>>
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const HeroesList: React.FC<HeroesListProps> = ({ setTotal }) => {
+const HeroesList: React.FC<HeroesListProps> = ({ setTotal, setIsLoading }) => {
   const navigate = useNavigate()
   const searchParamsObject = useSearchParamsObject()
 
@@ -39,15 +40,26 @@ const HeroesList: React.FC<HeroesListProps> = ({ setTotal }) => {
 
   useEffect(() => {
     setTotal(total || 0)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total])
 
+  useEffect(() => {
+    setIsLoading(isLoading)
+  }, [isLoading])
+
   if (isLoading) {
-    return <div>Carregando...</div>
+    return (
+      <div className={s.loading_wrapper}>
+        <Loader />
+      </div>
+    )
   }
 
   if (!results?.length) {
-    return <div>Sem dados.</div>
+    return (
+      <div className={s.no_data}>
+        <NoData />
+      </div>
+    )
   }
 
   return (

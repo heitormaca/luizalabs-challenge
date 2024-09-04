@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react'
-import s from './search-bar.module.scss'
 import { useSearchParams } from 'react-router-dom'
 import { useSearchParamsObject } from '../../../hooks/useSearchParamsObject'
+import s from './search-bar.module.scss'
 
 interface SearchBarProps {
   variant?: 'heros' | 'hero'

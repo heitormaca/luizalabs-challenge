@@ -1,18 +1,19 @@
 import { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useFavorites } from '../../../../contexts/favorites-context/favorites-context-hook'
-import { FavoriteToogle } from '../../../shared'
 import { useFavoritesCharacters } from '../../../../domains/characters/characters.hooks'
 import { useSearchParamsObject } from '../../../../hooks/useSearchParamsObject'
+import { FavoriteToogle, Loader, NoData } from '../../../shared'
 import Pagination from '../heroes-list/pagination'
 import s from './heroes-favorites-list.module.scss'
 
 interface HeroesFavoritesListProps {
   setTotal: React.Dispatch<React.SetStateAction<number>>
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const HeroesFavoritesList: React.FC<HeroesFavoritesListProps> = ({
   setTotal,
+  setIsLoading,
 }) => {
   const searchParamsObject = useSearchParamsObject()
   const isOnlyFavorites = searchParamsObject.onlyFavorites === 'true'
@@ -21,15 +22,11 @@ const HeroesFavoritesList: React.FC<HeroesFavoritesListProps> = ({
 
   const navigate = useNavigate()
 
-  const { favorites } = useFavorites()
-
-  const total = favorites.length
-
   const handleCharacterClick = (characterId: string) => {
     navigate(`/heroes/${characterId}`)
   }
 
-  const filterItens = useMemo(
+  const filterItems = useMemo(
     () =>
       (data || [])
         .filter((character) => {
@@ -46,23 +43,36 @@ const HeroesFavoritesList: React.FC<HeroesFavoritesListProps> = ({
     [data, searchParamsObject.nameStartsWith, searchParamsObject.orderBy]
   )
 
+  const total = filterItems.length
+
   useEffect(() => {
-    setTotal(favorites.length)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [favorites.length])
+    setTotal(filterItems.length)
+  }, [filterItems.length])
+
+  useEffect(() => {
+    setIsLoading(isLoading)
+  }, [isLoading])
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return (
+      <div className={s.loading_wrapper}>
+        <Loader />
+      </div>
+    )
   }
 
   if (!data?.length) {
-    return <div>Sem dados.</div>
+    return (
+      <div className={s.no_data}>
+        <NoData />
+      </div>
+    )
   }
 
   return (
     <section>
       <div className={s.wrapper}>
-        {filterItens.map((character) => {
+        {filterItems.map((character) => {
           const characterImage = `${character.thumbnail?.path}.${character.thumbnail?.extension}`
 
           return (
