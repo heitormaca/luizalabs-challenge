@@ -10,7 +10,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import tanstackQuery from '@tanstack/eslint-plugin-query'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'cypress', 'cypress.config.ts'] },
   {
     languageOptions: {
       ecmaVersion: 2020,

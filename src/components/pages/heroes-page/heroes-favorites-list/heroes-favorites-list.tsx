@@ -78,7 +78,8 @@ const HeroesFavoritesList: React.FC<HeroesFavoritesListProps> = ({
           return (
             <div key={character.id}>
               <div
-                className={s.image_wrapper}
+                className={s.image_character_wrapper}
+                data-character-id={character.id}
                 onClick={() => handleCharacterClick(String(character.id))}
               >
                 <img src={characterImage} alt={character.name} />
