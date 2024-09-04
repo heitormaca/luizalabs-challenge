@@ -1,0 +1,36 @@
+@use '../../../styles/utils';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  background-color: var(--color-background);
+
+  .content {
+    max-width: var(--max-w-content);
+    height: 100%;
+    margin: 0 auto;
+
+    .logo_wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-xl);
+      padding-top: var(--space-xl);
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@include utils.breakpoint(md) {
+  .wrapper {
+    .content {
+      .logo_wrapper {
+        justify-content: flex-start;
+      }
+    }
+  }
+}

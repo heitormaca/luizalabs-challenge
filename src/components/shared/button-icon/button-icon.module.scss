@@ -1,0 +1,18 @@
+.button {
+  display: flex;
+  padding: var(--space-xs);
+  border: 1px solid var(--red-900);
+  border-radius: var(--border-radius-xs);
+  background-color: var(--red-200);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--red-300);
+  }
+
+  &.disabled {
+    background-color: var(--gray-300);
+    border-color: var(--gray-800);
+    cursor: not-allowed;
+  }
+}

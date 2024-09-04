@@ -1,0 +1,70 @@
+@use 'utils';
+
+:root {
+  /* spacing values */
+  --space-unit: 1rem;
+  --space-4xs: calc(0.2 * var(--space-unit));
+  --space-3xs: calc(0.25 * var(--space-unit));
+  --space-2xs: calc(0.375 * var(--space-unit));
+  --space-xs: calc(0.5 * var(--space-unit));
+  --space-sm: calc(0.75 * var(--space-unit));
+  --space-md: calc(1 * var(--space-unit));
+  --space-lg: calc(1.25 * var(--space-unit));
+  --space-xl: calc(1.5 * var(--space-unit));
+  --space-2xl: calc(1.75 * var(--space-unit));
+  --space-3xl: calc(2 * var(--space-unit));
+  --space-4xl: calc(2.25 * var(--space-unit));
+  --space-5xl: calc(2.5 * var(--space-unit));
+  --space-6xl: calc(2.75 * var(--space-unit));
+  --space-7xl: calc(3 * var(--space-unit));
+  --space-8xl: calc(3.25 * var(--space-unit));
+  --space-9xl: calc(3.5 * var(--space-unit));
+  --space-10xl: calc(3.75 * var(--space-unit));
+  --max-w-content: 1120px;
+}
+
+.no_margin {
+  margin: 0 !important;
+}
+
+@include utils.breakpoint(2xs) {
+  :root {
+    --space-unit: calc(1rem * 0.8);
+  }
+}
+
+@include utils.breakpoint(xs) {
+  :root {
+    --space-unit: calc(1rem * 0.85);
+  }
+}
+
+@include utils.breakpoint(sm) {
+  :root {
+    --space-unit: calc(1rem * 0.9);
+  }
+}
+
+@include utils.breakpoint(md) {
+  :root {
+    --space-unit: 1rem;
+  }
+}
+
+@include utils.breakpoint(lg) {
+  :root {
+    --space-unit: calc(1rem * 1.1);
+  }
+}
+
+@include utils.breakpoint(xl) {
+  :root {
+    --space-unit: calc(1rem * 1.15);
+  }
+}
+
+@include utils.breakpoint(2xl) {
+  :root {
+    --space-unit: calc(1rem * 1.2);
+  }
+}

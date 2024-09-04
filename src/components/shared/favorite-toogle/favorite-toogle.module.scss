@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+
+  .tooltip {
+    position: relative;
+    display: flex;
+
+    .tooltiptext {
+      visibility: visible;
+      width: 130px;
+      background-color: var(--black);
+      color: var(--white);
+      text-align: center;
+      border-radius: var(--border-radius-xs);
+      padding: var(--space-xs);
+      position: absolute;
+      z-index: 1;
+      top: 150%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-left: calc((-1) * var(--space-2xs));
+        border-width: var(--space-2xs);
+        border-style: solid;
+        border-color: transparent transparent var(--black) transparent;
+      }
+    }
+  }
+
+  img {
+    cursor: pointer;
+  }
+}
